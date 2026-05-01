@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Планировщик ухода за комнатными растениями</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>
+                <span class="icon">🌱</span>
+                Планировщик ухода за растениями
+            </h1>
+            <p class="subtitle">Персональная база данных и система напоминаний</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🌿</div>
+                <div class="stat-number" id="totalPlants">0</div>
+                <div class="stat-label">Всего растений</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-number" id="pendingTasks">0</div>
+                <div class="stat-label">Задач сегодня</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number" id="completedTasks">0</div>
+                <div class="stat-label">Выполнено за неделю</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <!-- Форма добавления -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>➕ Добавить растение</h2>
+                </div>
+                <form id="plantForm" class="plant-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Название растения *</label>
+                            <input type="text" id="name" required placeholder="Например: Монстера">
+                        </div>
+                        <div class="form-group">
+                            <label for="species">Вид</label>
+                            <input type="text" id="species" placeholder="Фикус, Кактус...">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wateringInterval">
+                                <span class="emoji">💧</span> Интервал полива (дней)
+                            </label>
+                            <input type="number" id="wateringInterval" value="7" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fertilizingInterval">
+                                <span class="emoji">🌿</span> Интервал подкормки (дней)
+                            </label>
+                            <input type="number" id="fertilizingInterval" value="30" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="repottingInterval">
+                                <span class="emoji">🏺</span> Интервал пересадки (дней)
+                            </label>
+                            <input type="number" id="repottingInterval" value="365" min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lastWatered">📅 Последний полив</label>
+                            <input type="date" id="lastWatered">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastFertilized">📅 Последняя подкормка</label>
+                            <input type="date" id="lastFertilized">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastRepotted">📅 Последняя пересадка</label>
+                            <input type="date" id="lastRepotted">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">📝 Заметки</label>
+                        <textarea id="notes" rows="3" placeholder="Особые рекомендации по уходу..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span>🌱</span> Добавить растение
+                    </button>
+                </form>
+            </div>
+
+            <!-- Напоминания -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>⏰ Активные напоминания</h2>
+                </div>
+                <div id="remindersList" class="reminders-list"></div>
+            </div>
+        </div>
+
+        <!-- Список растений -->
+        <div class="card full-width">
+            <div class="card-header">
+                <h2>📋 Моя коллекция растений</h2>
+                <button class="btn btn-secondary" id="exportBtn">
+                    📥 Экспорт данных
+                </button>
+            </div>
+            <div id="plantsList" class="plants-list"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Редактировать растение</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>Вид</label>
+                    <input type="text" id="editSpecies">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>💧 Полив (дней)</label>
+                        <input type="number" id="editWateringInterval" required>
+                    </div>
+                    <div class="form-group">
+                        <label>🌿 Подкормка (дней)</label>
+                        <input type="number" id="editFertilizingInterval" required>
+                    </div>
+                    <div class="form-group">
+                        <label>🏺 Пересадка (дней)</label>
+                        <input type="number" id="editRepottingInterval" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
