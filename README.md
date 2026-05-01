@@ -120,32 +120,39 @@ plant-care-planner/
 ```javascript
 // Структура данных растения
 {
-  id: "unique-id",
-  name: "Название растения",
-  type: "Тип растения",
-  location: "Местоположение",
-  image: "base64-строка",
-  wateringInterval: 7,
-  fertilizingInterval: 30,
-  lastWatered: "2024-01-01",
-  notes: "Заметки"
+ id: "unique-id-123",                   
+  name: "Монстера",                      
+  type: "Фикус",                         
+  location: "Гостиная, окно",           
+  image: "data:image/jpeg;base64,/9j/4AAQ...", 
+  wateringInterval: 7,                   
+  fertilizingInterval: 30,               
+  lastWatered: "2024-01-15",              
+  notes: "Любит яркий рассеянный свет"   
 }
 ```
-
-## 🎨 Дизайн система
-
 ### Цветовая палитра
 
-* **Primary**: `#22D3EE` (Cyan)
-* **Secondary**: `#0891B2` (Dark Cyan)
-* **Dark**: `#1E293B` (Slate)
-* **Darker**: `#0F172A` (Dark Slate)
-* **Accent**: `#10B981` (Emerald)
+| Роль | Цвет | Код |
+|------|------|-----|
+| **Primary (Акцент)** | Cyan | `#22D3EE` |
+| **Primary Dark** | Dark Cyan | `#0891B2` |
+| **Dark** | Slate | `#1E293B` |
+| **Darker** | Dark Slate | `#0F172A` |
+| **Accent** | Emerald | `#10B981` |
+| **Warning** | Amber | `#F59E0B` |
+| **Error** | Red | `#EF4444` |
 
 ### Типографика
 
-* **Шрифт**: Inter (Google Fonts)
-* **Веса**: 300, 400, 500, 600, 700
+| Элемент | Размер | Вес | Пример |
+|---------|--------|-----|---------|
+| H1 | 32px | 700 | **Планировщик растений** |
+| H2 | 24px | 600 | **Мои растения** |
+| Body | 16px | 400 | Основной текст |
+| Small | 14px | 400 | Вспомогательный текст |
+
+**Шрифт:** [Inter](https://fonts.google.com/specimen/Inter) (Google Fonts)
 
 ## 📄 Лицензия
 
