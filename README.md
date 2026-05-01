@@ -98,13 +98,11 @@ npx serve .
 ## 🎯 Структура проекта
 
 ```
-plant-care-pro/
-├── index.html          # Главный HTML файл
-├── README.md           # Документация проекта
-├── LICENSE             # Лицензия MIT
-├── .gitignore          # Исключения Git
-└── assets/             # Ресурсы проекта
-    └── images/         # Изображения
+plant-care-planner/
+├── index.html      # Основная структура
+├── style.css       # Стили и адаптив
+├── script.js       # Вся логика приложения
+└── README.md       # Документация
 ```
 
 ## 🛠 Архитектура кода
